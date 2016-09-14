@@ -27,11 +27,11 @@ Finally, build the `PDF` document by running the following in the command line:
 
 Your thesis document will look something like this:
 
->   [Plain (PDF)](https://dl.bintray.com/matej/cam-thesis/thesis-master.pdf)
+>   [Plain (PDF)](https://dl.bintray.com/matej/cam-thesis/thesis.pdf)
 
 If you use the _clean_ sample, which can be found in [`./Samples/clean`](Samples/clean), it will look like this:
 
->   [Sample Clean (PDF)](https://dl.bintray.com/matej/cam-thesis/SampleClean-master.pdf)
+>   [Sample Clean (PDF)](https://dl.bintray.com/matej/cam-thesis/sample-clean.pdf)
 
 The template also supports DVI and PS formats. All three formats can be generated
 with the provided `Makefile`.
@@ -83,6 +83,16 @@ It also supports some custom options.
     *   page count starts with 3,
     *   if the `hyperref` package is used, the option `pdfpagelabels=false` will
         be passed to it.
+
+*   `firstyr`: formats the document as a first-year report (essentially removing
+    some unneeded elements and modifying the submission note). Here is a list of
+    formatting points in which the first year report differs from a normal thesis:
+
+    *   an appropraite subtitle is added,
+    *   the submission note is changed appropriately,
+    *   no standalone abstract,
+    *   no declaration,
+    *   no acknowledgements.
 
 *   `times`: tells the class to use the _times_ font.
 
