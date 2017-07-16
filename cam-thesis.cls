@@ -355,7 +355,7 @@ for the degree of Doctor of Philosophy%
 \setlength{\cam@logorightnudge}{-0.5\paperwidth+12mm}
 \newsavebox{\cam@logo}
 \begin{lrbox}{\cam@logo}
-\hspace*{\cam@logorightnudge}\includegraphics[width=73mm]{CollegeShields/CUni}
+\hspace*{\cam@logorightnudge}\includegraphics[width=73mm]{CollegeShields/QMUL}
 \end{lrbox}
 
 %% THESIS TITLE box
