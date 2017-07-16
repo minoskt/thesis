@@ -83,6 +83,11 @@
 \newif\ifcam@firstyr\cam@firstyrfalse
 \DeclareOption{firstyr}{\cam@firstyrtrue}
 
+% backrefs - add back references
+%
+\newif\ifcam@backrefs\cam@backrefsfalse
+\DeclareOption{backrefs}{\cam@backrefstrue}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -139,7 +144,7 @@
 \ifcam@glossary
     \RequirePackage{glossaries}
     \makeglossaries%
-    \newcommand{\printthesisglossary}{\printglossary}
+    \newcommand{\printthesisglossary}{\printglossary[nonumberlist]}
     \newcommand{\cam@printthesisglossary}{%
         \cleardoublepage%
         \pagestyle{empty}%
@@ -195,7 +200,7 @@
 \ifcam@techreport
 \cam@calcpaperdims{25mm}{25mm}{20mm}{20mm}
 \else
-\cam@calcpaperdims{35mm}{30mm}{35mm}{25mm}
+\cam@calcpaperdims{30mm}{20mm}{20mm}{20mm}
 \fi
 
 
@@ -358,17 +363,15 @@ for the degree of Doctor of Philosophy%
 \begin{lrbox}{\cam@title}
     \begin{minipage}[c][\height][c]{.98\textwidth}
         \begin{center}
-        	\begin{spacing}{2}
-            	{\Huge%
-                    \ifcam@times\else%
-                        \bfseries%
-                    \fi%
-                 {\@title{}}%
-                 \ifcam@firstyr\\%
-                 {\emph{\LARGE PhD Proposal}}%
-                 \fi}%
-        	\end{spacing}
-        \end{center}
+			\Huge%
+				\ifcam@times\else%
+				\bfseries%
+				\fi%
+			{\@title{}}%
+			\ifcam@firstyr\\%
+				{\vspace{5mm}\emph{\LARGE PhD Proposal}}%
+			\fi%
+		\end{center}
     \end{minipage}
 \end{lrbox}
 
@@ -462,16 +465,21 @@ for the degree of Doctor of Philosophy%
 % Technical report doesn't need the declaration
 % (see http://www.cl.cam.ac.uk/techreports/submission.html).
 \else
-\ifcam@firstyr
+{\ifcam@firstyr
 % First yr report doesn't need the declaration
 \else
 \chapter*{Declaration}
 \thispagestyle{empty}
-This dissertation is my own work and contains nothing which is the outcome of
-work done in collaboration with others, except where specified in the text. This
-dissertation is not substantially the same as any that I have submitted for a
-degree or diploma or other qualification at any other university. This
-dissertation does not exceed the prescribed limit of 60\,000 words.
+This dissertation is the result of my own work and includes nothing which is the outcome
+of work done in collaboration except as declared in the Preface and specified in the text.
+It is not substantially the same as any that I have submitted, or am concurrently
+submitting, for a degree or diploma or other qualification at the University of Cambridge
+or any other University or similar institution except as declared in the Preface and
+specified in the text. I further state that no substantial part of my dissertation has
+already been submitted, or is being concurrently submitted, for any such degree, diploma
+or other qualification at the University of Cambridge or any other University or similar
+institution except as declared in the Preface and specified in the text.
+This dissertation does not exceed the prescribed limit of 60\,000 words.
 
 % Leaving some space for the signature:
 \vspace{15mm}
@@ -481,6 +489,7 @@ dissertation does not exceed the prescribed limit of 60\,000 words.
 \@date{}\\
 \end{flushright}
 \vfill
+\fi}
 \fi
 
 
@@ -517,5 +526,24 @@ dissertation does not exceed the prescribed limit of 60\,000 words.
 \cleardoublepage
 \pagestyle{plain}
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Backrefs
+%%
+%%%%%
+
+\ifcam@backrefs
+\RequirePackage[hyperpageref]{backref}
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{%
+	\ifcase #1 %
+	\or
+	{\footnotesize Cited on page #2.}%
+	\else
+	{\footnotesize Cited on pages #2.}%
+	\fi
+}
+\fi
 
 %%%%% EOF: cam-thesis.cls
